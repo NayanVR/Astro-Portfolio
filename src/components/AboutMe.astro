@@ -1,0 +1,43 @@
+---
+import SectionTitle from "./util/SectionTitle.astro";
+import StrongWord from "./util/StrongWord.astro";
+---
+
+<section class="w-full">
+    <SectionTitle
+        title="You're probably wondering who I am?"
+        icon="question"
+        bookmarkColor="primary"
+    />
+    <ul
+        class="list-disc list-outside mx-[10%] my-20 text-xl flex flex-col gap-8"
+    >
+        <li>
+            I am a 19-year-old computer science engineering student residing in <StrongWord
+                text="Gujarat, India."
+                color="primary"
+            />
+        </li>
+        <li>
+            I love to do <StrongWord
+                text="Full-stack Web Development"
+                color="primary"
+            />, <StrongWord text="Graphic Designing" color="tertiary" /> & <StrongWord
+                text="UI/UX Designing."
+                color="secondary"
+            />
+        </li>
+        <li>
+            People say I'm good at <StrongWord
+                text="Front-end Development"
+                color="secondary"
+            />, Logo Design & Social Media Management.
+        </li>
+        <li>
+            Apart from these things I love to do <StrongWord
+                text="content creation(youtube)"
+                color="tertiary"
+            /> and video editing.
+        </li>
+    </ul>
+</section>

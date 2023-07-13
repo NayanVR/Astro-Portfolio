@@ -1,0 +1,36 @@
+---
+export interface Props {
+    title: string;
+    icon: "delta" | "lambda" | "pi" | "psi" | "question" | "theta";
+    bookmarkColor: "primary" | "secondary" | "tertiary";
+}
+
+const { title, icon, bookmarkColor } = Astro.props;
+---
+
+<div
+    class=`h-20 w-4/6 bg-light flex relative items-center gap-4 clip-triangle before:w-16 before:h-full before:bg-light before:absolute before:top-0 before:-right-16 before:z-10 after:w-16 after:h-full after:bg-${bookmarkColor} after:absolute after:bottom-0 after:-right-16`
+>
+    <div
+        class="h-16 min-w-[4rem] m-2 bg-dark-1 flex justify-center items-center rounded-lg"
+    >
+        <img src=`/title-icons/${icon}.svg` alt="" class="h-8 w-8" />
+    </div>
+    <h3 class="text-2xl w-full text-dark-1 font-bold">
+        {title}
+    </h3>
+</div>
+
+<style>
+    .clip-triangle::before {
+        clip-path: polygon(0 0, 0 100%, 100% 0);
+    }
+    .clip-triangle::after {
+        clip-path: polygon(0 0, 0 100%, 100% 100%);
+    }
+</style>
+
+<!-- Dummy classes to preload tailwind classes -->
+<span class="after:bg-primary"></span>
+<span class="after:bg-secondary"></span>
+<span class="after:bg-tertiary"></span>

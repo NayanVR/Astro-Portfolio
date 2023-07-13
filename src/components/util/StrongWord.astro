@@ -1,0 +1,17 @@
+---
+export interface Props {
+    text: string;
+    color: "primary" | "secondary" | "tertiary";
+}
+const { text, color } = Astro.props;
+const bgClassName = `before:bg-${color}`;
+---
+
+<span
+    class=`relative hover:text-dark transition-all before:h-[3px] before:w-full hover:before:h-full before:transition-all before:origin-bottom before:absolute before:bottom-0 before:left-0 before:-z-10 before:pointer-events-none ${bgClassName}`
+    >{text}</span
+>
+<!-- Dummy classes to preload tailwind classes -->
+<span class="before:bg-primary"></span>
+<span class="before:bg-secondary"></span>
+<span class="before:bg-tertiary"></span>

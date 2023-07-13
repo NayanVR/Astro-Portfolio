@@ -1,5 +1,5 @@
 <main
-    class="w-full h-screen bg-dark relative overflow-hidden flex flex-col justify-center items-center"
+    class="w-full h-screen relative overflow-hidden flex flex-col justify-center items-center"
 >
     <div id="grid-container"></div>
     <div id="hero-cursor"></div>
@@ -8,139 +8,145 @@
     >
     </div>
 
-    <h2 class="text-light-1 text-4xl z-50">Hello there!👋</h2>
-    <h1 class="text-light text-9xl font-bold z-50">
-        I'm Nayan<span class="outlined-text">VR</span>
-    </h1>
-</main>
+    <div class="z-50">
+        <h2
+            class="text-right bg-gradient-to-b from-secondary to-secondary-dark bg-clip-text text-transparent font-bold italic text-4xl"
+        >
+            Hello there!<span class="text-white">👋</span>
+        </h2>
+        <h1 class="text-light text-center text-9xl font-bold">
+            I'm Nayan<span class="outlined-text">VR</span>
+        </h1>
+    </div>
 
-<script>
-    const gridContainer = document.getElementById("grid-container")!;
-    const cursor = document.getElementById("hero-cursor")!;
+    <script>
+        const gridContainer = document.getElementById("grid-container")!;
+        const cursor = document.getElementById("hero-cursor")!;
 
-    const columns = parseInt(`${window.innerWidth / 30}`);
-    const rows = parseInt(`${window.innerHeight / 30}`);
+        const columns = parseInt(`${window.innerWidth / 30}`);
+        const rows = parseInt(`${window.innerHeight / 30}`);
 
-    gridContainer.style.setProperty("--columns", columns.toString());
-    gridContainer.style.setProperty("--rows", rows.toString());
+        gridContainer.style.setProperty("--columns", columns.toString());
+        gridContainer.style.setProperty("--rows", rows.toString());
 
-    const TILE_BASE_OPACITY = 0.1;
+        const TILE_BASE_OPACITY = 0.1;
 
-    let mousePos = {
-        x: 0,
-        y: 0,
-        radius: 200,
-    };
+        let mousePos = {
+            x: 0,
+            y: 0,
+            radius: 200,
+        };
 
-    let tiles: { elem: HTMLDivElement; x: number; y: number }[] = [];
+        let tiles: { elem: HTMLDivElement; x: number; y: number }[] = [];
 
-    const handleMouseMove = (e) => {
-        mousePos.x = e.clientX;
-        mousePos.y = e.clientY;
-        cursor.style.left = mousePos.x + "px";
-        cursor.style.top = mousePos.y + "px";
-    };
-    document.addEventListener("mousemove", handleMouseMove);
+        const handleMouseMove = (e) => {
+            mousePos.x = e.clientX;
+            mousePos.y = e.clientY;
+            cursor.style.left = mousePos.x + "px";
+            cursor.style.top = mousePos.y + "px";
+        };
+        document.addEventListener("mousemove", handleMouseMove);
 
-    const createTile = (index) => {
-        const tile = document.createElement("div");
-        tile.classList.add("tile");
-        const dot = document.createElement("div");
-        dot.classList.add("dot");
-        tile.appendChild(dot);
-        return tile;
-    };
+        const createTile = (index) => {
+            const tile = document.createElement("div");
+            tile.classList.add("tile");
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+            tile.appendChild(dot);
+            return tile;
+        };
 
-    const createTiles = (quantity) => {
-        for (let i = 0; i < quantity; i++) {
-            const tile = createTile(i);
-            gridContainer.appendChild(tile);
-            tiles.push({ elem: tile, x: 0, y: 0 });
-        }
-        tiles.forEach((tile, index) => {
-            const tilePos = tile.elem.getBoundingClientRect();
-            tile.x = tilePos.x + tilePos.width / 2;
-            tile.y = tilePos.y + tilePos.height / 2;
-        });
-    };
-
-    createTiles(columns * rows);
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        tiles.forEach((tile, index) => {
-            const distance = Math.sqrt(
-                Math.pow(mousePos.x - tile.x, 2) +
-                    Math.pow(mousePos.y - tile.y, 2)
-            );
-            const radius = mousePos.radius - distance;
-            const opacity = Math.max(radius / 500, TILE_BASE_OPACITY);
-            if (radius > 0) {
-                tile.elem.style.opacity = opacity.toString();
-                tile.elem.style.transform = `scale(${Math.max(
-                    radius / 100,
-                    1
-                )})`;
-            } else {
-                tile.elem.style.opacity = "0.1";
-                tile.elem.style.transform = "scale(1)";
+        const createTiles = (quantity) => {
+            for (let i = 0; i < quantity; i++) {
+                const tile = createTile(i);
+                gridContainer.appendChild(tile);
+                tiles.push({ elem: tile, x: 0, y: 0 });
             }
-        });
-    }
+            tiles.forEach((tile, index) => {
+                const tilePos = tile.elem.getBoundingClientRect();
+                tile.x = tilePos.x + tilePos.width / 2;
+                tile.y = tilePos.y + tilePos.height / 2;
+            });
+        };
 
-    animate();
-</script>
+        createTiles(columns * rows);
 
-<style is:inline>
-    #grid-container {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
+        function animate() {
+            requestAnimationFrame(animate);
 
-        display: grid;
-        grid-template-columns: repeat(var(--columns), 1fr);
-        grid-template-rows: repeat(var(--rows), 1fr);
-        justify-content: center;
-    }
-    .tile {
-        min-width: 100%;
-        min-height: 100%;
-        position: relative;
-        opacity: 0.1;
-    }
-    .dot {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background-color: #f6f6f6;
-    }
-    #hero-cursor {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        background: radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.05) 0%,
-            rgba(255, 255, 255, 0) 60%,
-            rgba(255, 255, 255, 0) 100%
-        );
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 5;
-    }
-    .outlined-text {
-        -webkit-text-fill-color: #050505;
-        -webkit-text-stroke-width: 2px;
-        -webkit-text-stroke-color: #f6f6f6;
-    }
-</style>
+            tiles.forEach((tile, index) => {
+                const distance = Math.sqrt(
+                    Math.pow(mousePos.x - tile.x, 2) +
+                        Math.pow(mousePos.y - tile.y, 2)
+                );
+                const radius = mousePos.radius - distance;
+                const opacity = Math.max(radius / 500, TILE_BASE_OPACITY);
+                if (radius > 0) {
+                    tile.elem.style.opacity = opacity.toString();
+                    tile.elem.style.transform = `scale(${Math.max(
+                        radius / 100,
+                        1
+                    )})`;
+                } else {
+                    tile.elem.style.opacity = "0.1";
+                    tile.elem.style.transform = "scale(1)";
+                }
+            });
+        }
+
+        animate();
+    </script>
+
+    <style is:inline>
+        #grid-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            display: grid;
+            grid-template-columns: repeat(var(--columns), 1fr);
+            grid-template-rows: repeat(var(--rows), 1fr);
+            justify-content: center;
+        }
+        .tile {
+            min-width: 100%;
+            min-height: 100%;
+            position: relative;
+            opacity: 0.1;
+        }
+        .dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #f6f6f6;
+        }
+        #hero-cursor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(255, 255, 255, 0) 60%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 5;
+        }
+        .outlined-text {
+            -webkit-text-fill-color: #050505;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: var(--tw-primary-color);
+        }
+    </style>
+</main>
