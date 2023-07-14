@@ -1,0 +1,30 @@
+---
+import IsometricTile from "./util/IsometricTile.astro";
+import SectionTitle from "./util/SectionTitle.astro";
+
+const skills = [
+    "html",
+    "css",
+    "js",
+    "node",
+    "reactjs",
+    "nextjs",
+    "java",
+    "sass",
+    "figma",
+    "ps",
+    "ai",
+    "ae",
+];
+---
+
+<section>
+    <SectionTitle
+        title="Let me tell you how I make these amazing things."
+        icon="pi"
+        bookmarkColor="primary"
+    />
+    <div class="my-20 px-[10%] flex flex-wrap gap-x-16 gap-y-4">
+        {skills.map((skill) => <IsometricTile skillName={skill} />)}
+    </div>
+</section>
