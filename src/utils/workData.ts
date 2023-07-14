@@ -1,9 +1,3 @@
-interface CardData {
-    title: string;
-    imgName: string;
-    link: string;
-}
-
 const data = {
     "web": [
         {
@@ -29,5 +23,5 @@ const data = {
     ],
 }
 
-export const getCardsData = (type: keyof typeof data) => data[type].map((item: CardData) => item);
+export const getCardsData = (type: keyof typeof data) => data[type].map((item) => item);
 export type CategoryType = keyof typeof data;

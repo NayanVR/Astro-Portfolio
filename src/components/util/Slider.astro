@@ -33,6 +33,14 @@ const cardData = getCardsData(sliderName);
             ))
         }
     </div>
+    <div
+        class="absolute top-0 left-0 h-full w-20 bg-gradient-to-r from-dark to-transparent"
+    >
+    </div>
+    <div
+        class="absolute top-0 right-0 h-full w-20 bg-gradient-to-l from-dark to-transparent"
+    >
+    </div>
 </div>
 
 <script define:vars={{ sliderName }}>
@@ -44,16 +52,12 @@ slides.forEach((slide) => {
     slider.appendChild(slide.cloneNode(true));
 });
 
-let startTime;
 let lastPos = 0;
 let repeatPoint = slider.clientWidth / 2;
 
-function animateSlider(time) {
-    if (!startTime) startTime = time;
-
+function animateSlider() {
     slider.style.transform = `translateX(-${lastPos}px)`;
     lastPos = lastPos >= repeatPoint ? 0 : lastPos + 1;
-
     requestAnimationFrame(animateSlider);
 }
 animateSlider();
