@@ -19,6 +19,15 @@ module.exports = {
 			fontFamily: {
 				'sans': ['JetBrains Mono', 'sans-serif'],
 			},
+			animation: {
+				'slider': 'slider 5s linear infinite',
+			},
+			keyframes: {
+				'slider': {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(-100%)' },
+				}
+			},
 		},
 	},
 	plugins: [],

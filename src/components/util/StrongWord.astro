@@ -3,7 +3,8 @@ export interface Props {
     text: string;
     color: "primary" | "secondary" | "tertiary";
 }
-const { text, color } = Astro.props;
+let { text, color } = Astro.props;
+text = text.replaceAll(" ", "\u00a0");
 const bgClassName = `before:bg-${color}`;
 ---
 
