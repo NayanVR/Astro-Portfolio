@@ -20,12 +20,12 @@ module.exports = {
 				'sans': ['JetBrains Mono', 'sans-serif'],
 			},
 			animation: {
-				'slider': 'slider 5s linear infinite',
+				'spin': 'spin 10s linear infinite',
 			},
 			keyframes: {
-				'slider': {
-					'0%': { transform: 'translateX(0)' },
-					'100%': { transform: 'translateX(-100%)' },
+				'spin': {
+					'0%': { transform: 'translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(0deg)' },
+					'100%': { transform: 'translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(360deg)' },
 				}
 			},
 		},
