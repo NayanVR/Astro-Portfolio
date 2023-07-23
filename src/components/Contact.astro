@@ -1,5 +1,6 @@
 ---
 import SectionTitle from "./util/SectionTitle.astro";
+import StrongWord from "./util/StrongWord.astro";
 ---
 
 <section>
@@ -8,5 +9,45 @@ import SectionTitle from "./util/SectionTitle.astro";
         icon="delta"
         bookmarkColor="tertiary"
     />
-    <div class="my-20 px-[10%]"></div>
+    <div class="my-20 px-[10%] flex flex-col sm:flex-row items-center">
+        <div class="text-4xl w-1/2">
+            <h1 class="mb-2">Hit me an email!</h1>
+            <div class="flex gap-2 items-center">    
+                <a href="mailto:nvrgeek@gmail.com">
+                    <StrongWord text="nvrgeek@gmail.com" color="tertiary" />
+                </a>
+                <button onclick="
+                copyToClipboard()
+                ">
+                    <img class="h-6 mt-1" src="/icons/copy-icon.svg" alt="copy to clipboard" />
+                </button>
+            </div>
+        </div>
+        <div class="w-1/2 max-w-sm">
+            <div class="flex gap-4">
+                <a href="https://twitter.com/nayanvr" target="_blank">
+                    <img src="/social-icons/twitter.svg" alt="Twitter" />
+                </a>
+                <a href="https://github.com/NayanVR" target="_blank">
+                    <img src="/social-icons/github.svg" alt="Github" />
+                </a>
+                <a href="https://www.linkedin.com/in/nayan-radadiya" target="_blank">
+                    <img src="/social-icons/linkedin.svg" alt="LinkedIn" />
+                </a>
+                <a href="https://www.instagram.com/nayan_vr" target="_blank">
+                    <img src="/social-icons/instagram.svg" alt="Instagram" />
+                </a>
+                <a href="https://www.behance.net/nayanvr" target="_blank">
+                    <img src="/social-icons/behance.svg" alt="Behance" />
+                </a>
+            </div>
+            <button class="w-full py-4 mt-4 bg-secondary text-dark text-xl font-bold rounded-md hover:bg-secondary-dark transition-all">
+                Download Resume
+            </button>
+        </div>
+    </div>
 </section>
+
+<script>
+    const copyToClipboard = _ => navigator.clipboard.writeText("nvrgeek@gmail.com");
+</script>
