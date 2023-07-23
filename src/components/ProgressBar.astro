@@ -1,0 +1,72 @@
+<div class="fixed top-0 right-0 h-screen p-8 z-[1000] bg-gradient-to-r from-transparent via-transparent to-dark hidden sm:block">
+    <div class="flex flex-col h-full items-center">
+        <div data-active="true" class="min-w-[1rem] min-h-[1rem] border-2 bg-dark data-[active=true]:bg-white rounded-full"></div>
+        
+        <div class="w-0.5 h-full bg-dark-2">
+            <div data-progress style="height: 50%;" class="w-full bg-white"></div>
+        </div>
+        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+        <div class="w-0.5 h-full bg-dark-2">
+            <div data-progress class="w-full bg-white"></div>
+        </div>
+        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+        <div class="w-0.5 h-full bg-dark-2">
+            <div data-progress class="w-full bg-white"></div>
+        </div>
+        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+        <div class="w-0.5 h-full bg-dark-2">
+            <div data-progress class="w-full bg-white"></div>
+        </div>
+        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+        <div class="w-0.5 h-full bg-dark-2">
+            <div data-progress class="w-full bg-white"></div>
+        </div>
+        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+    </div>
+</div>
+
+<script>
+const sectionTitles = document.querySelectorAll('[data-section-title]');
+const breakpoints: HTMLElement[] = Array.from(document.querySelectorAll('[data-breakpoint]'));
+const progressBars: HTMLElement[] = Array.from(document.querySelectorAll('[data-progress]'));
+const vH = window.innerHeight;
+const topOfTitles = [];
+
+sectionTitles.forEach(title => {
+    topOfTitles.push(title.getBoundingClientRect().top + window.scrollY);
+});
+
+window.onscroll = () => {
+    const scrollPosition = window.scrollY;
+    let sectionIndex = 0;
+
+    breakpoints.forEach((breakpoint, index) => {
+        const hasCrossed = scrollPosition >= topOfTitles[index] - vH / 2;
+        breakpoint.dataset.active = hasCrossed ? "true" : "false";
+        if (hasCrossed) {
+            sectionIndex = index + 1; // coz there are n bars and n + 1 breakpoints
+            return;
+        }
+    });
+
+    if (sectionIndex === 5) {
+        progressBars[sectionIndex - 1].style.height = `100%`;
+        return;
+    }
+
+    let topOfSection = sectionIndex === 0 ? 0 : topOfTitles[sectionIndex - 1];
+    let bottomOfSection = topOfTitles[sectionIndex];
+
+    const progress = (scrollPosition - topOfSection + (vH/2)) / (bottomOfSection - topOfSection);
+    progressBars[sectionIndex].style.height = `${progress * 100}%`;
+
+    progressBars.forEach((progressBar, index) => {
+        if (index > sectionIndex) {
+            progressBar.style.height = `0%`;
+        }
+        if (index < sectionIndex) {
+            progressBar.style.height = `100%`;
+        }
+    });
+}
+</script>

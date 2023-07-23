@@ -9,6 +9,7 @@ const { title, icon, bookmarkColor } = Astro.props;
 ---
 
 <div
+    data-section-title
     class=`h-20 w-4/6 bg-light flex relative items-center gap-4 clip-triangle before:w-16 before:h-full before:bg-light before:absolute before:top-0 before:-right-16 before:z-10 after:w-16 after:h-full after:bg-${bookmarkColor} after:absolute after:bottom-0 after:-right-16`
 >
     <div
