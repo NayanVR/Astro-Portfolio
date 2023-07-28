@@ -5,23 +5,23 @@
         <div class="w-0.5 h-full bg-dark-2">
             <div data-progress style="height: 50%;" class="w-full bg-white"></div>
         </div>
-        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+        <div data-breakpoint="About" data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full relative cursor-pointer after:absolute after:content-[attr(data-breakpoint)] after:text-dark after:bg-light after:right-6 after:top-1/2 after:-translate-y-1/2 after:px-2 after:py-1 after:rounded-md hover:after:scale-100 after:scale-0 after:transition-all after:origin-right"></div>
         <div class="w-0.5 h-full bg-dark-2">
             <div data-progress class="w-full bg-white"></div>
         </div>
-        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+        <div data-breakpoint="Work" data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full relative cursor-pointer after:absolute after:content-[attr(data-breakpoint)] after:text-dark after:bg-light after:right-6 after:top-1/2 after:-translate-y-1/2 after:px-2 after:py-1 after:rounded-md hover:after:scale-100 after:scale-0 after:transition-all after:origin-right"></div>
         <div class="w-0.5 h-full bg-dark-2">
             <div data-progress class="w-full bg-white"></div>
         </div>
-        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+        <div data-breakpoint="Showcase" data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full relative cursor-pointer after:absolute after:content-[attr(data-breakpoint)] after:text-dark after:bg-light after:right-6 after:top-1/2 after:-translate-y-1/2 after:px-2 after:py-1 after:rounded-md hover:after:scale-100 after:scale-0 after:transition-all after:origin-right"></div>
         <div class="w-0.5 h-full bg-dark-2">
             <div data-progress class="w-full bg-white"></div>
         </div>
-        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+        <div data-breakpoint="Skills" data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full relative cursor-pointer after:absolute after:content-[attr(data-breakpoint)] after:text-dark after:bg-light after:right-6 after:top-1/2 after:-translate-y-1/2 after:px-2 after:py-1 after:rounded-md hover:after:scale-100 after:scale-0 after:transition-all after:origin-right"></div>
         <div class="w-0.5 h-full bg-dark-2">
             <div data-progress class="w-full bg-white"></div>
         </div>
-        <div data-breakpoint data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full"></div>
+        <div data-breakpoint="Contact" data-active="false" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full relative cursor-pointer after:absolute after:content-[attr(data-breakpoint)] after:text-dark after:bg-light after:right-6 after:top-1/2 after:-translate-y-1/2 after:px-2 after:py-1 after:rounded-md hover:after:scale-100 after:scale-0 after:transition-all after:origin-right"></div>
     </div>
 </div>
 
@@ -36,6 +36,17 @@ sectionTitles.forEach(title => {
     topOfTitles.push(title.getBoundingClientRect().top + window.scrollY);
 });
 
+// scroll on click
+breakpoints.forEach((breakpoint, index) => {
+    breakpoint.addEventListener('click', () => {
+        window.scrollTo({
+            top: (topOfTitles[index] - vH / 2) + 10,
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Progress bar logic
 window.onscroll = () => {
     const scrollPosition = window.scrollY;
     let sectionIndex = 0;
