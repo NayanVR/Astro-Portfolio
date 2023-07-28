@@ -21,11 +21,18 @@ module.exports = {
 			},
 			animation: {
 				'spin': 'spin 10s linear infinite',
+				'wave': 'wave 1.5s alternate ease infinite',
 			},
 			keyframes: {
 				'spin': {
 					'0%': { transform: 'translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(0deg)' },
 					'100%': { transform: 'translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(360deg)' },
+				},
+				'wave': {
+					'0%': { transform: 'translateX(0px) rotate(0deg)' },
+					'30%': { transform: 'translateX(3px) rotate(20deg)' },
+					'60%': { transform: 'translateX(-5px) rotate(-2deg)' },
+					'100%': { transform: 'translateX(5px) rotate(30deg)' },
 				}
 			},
 		},
