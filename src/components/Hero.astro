@@ -41,7 +41,7 @@
 
         const handleMouseMove = (e) => {
             mousePos.x = e.clientX;
-            mousePos.y = e.clientY;
+            mousePos.y = e.clientY + window.scrollY;
             cursor.style.left = mousePos.x + "px";
             cursor.style.top = mousePos.y + "px";
         };
