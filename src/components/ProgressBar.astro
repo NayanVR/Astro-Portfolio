@@ -1,6 +1,6 @@
 <div class="fixed top-0 right-0 h-screen p-8 z-[1000] bg-gradient-to-r from-transparent via-transparent to-dark hidden sm:block">
     <div class="flex flex-col h-full items-center">
-        <div data-active="true" class="min-w-[1rem] min-h-[1rem] border-2 bg-dark data-[active=true]:bg-white rounded-full"></div>
+        <div data-breakpoint="Hero" data-active="true" class="min-w-[1rem] min-h-[1rem] border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full relative cursor-pointer after:absolute after:content-[attr(data-breakpoint)] after:text-dark after:bg-light after:right-6 after:top-1/2 after:-translate-y-1/2 after:px-2 after:py-1 after:rounded-md hover:after:scale-100 after:scale-0 after:transition-all after:origin-right"></div>
         
         <div class="w-0.5 h-full bg-dark-2">
             <div data-progress style="height: 50%;" class="w-full bg-white"></div>
@@ -36,15 +36,21 @@ sectionTitles.forEach(title => {
     topOfTitles.push(title.getBoundingClientRect().top + window.scrollY);
 });
 
+// adds 0px for hero section (temp)
+topOfTitles.unshift(1);
+
 // scroll on click
 breakpoints.forEach((breakpoint, index) => {
     breakpoint.addEventListener('click', () => {
         window.scrollTo({
-            top: (topOfTitles[index] - vH / 2) + 10,
+            top: (topOfTitles[index-1] - vH / 2) + 10,
             behavior: 'smooth'
         });
     });
 });
+
+topOfTitles.shift();
+breakpoints.shift();
 
 // Progress bar logic
 window.onscroll = () => {

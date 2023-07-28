@@ -8,10 +8,10 @@ const { imageName, desc } = Astro.props;
 ---
 
 <div
-    class="w-full h-full p-1 border-2 border-light rounded-lg relative overflow-hidden group"
+    class="w-full h-full p-1 md:border-2 border-light md:rounded-lg rounded-md relative overflow-hidden group"
 >
     <img
-        class="object-cover w-full h-full rounded-md group-hover:blur-xl transition-all"
+        class="object-cover w-full h-full md:rounded-md rounded-sm group-hover:blur-xl transition-all"
         src=`/showcase/${imageName}.png`
         alt={imageName}
     />
@@ -20,7 +20,7 @@ const { imageName, desc } = Astro.props;
     >
     </div>
     <p
-        class="absolute top-1/2 left-1/2 w-full text-center text-lg px-4 -translate-x-1/2 group-hover:-translate-y-1/2 translate-y-0 opacity-0 group-hover:opacity-100"
+        class="absolute top-1/2 left-1/2 w-full text-center md:text-lg text-xs sm:px-4 px-1 -translate-x-1/2 group-hover:-translate-y-1/2 translate-y-0 opacity-0 group-hover:opacity-100"
     >
         {desc}
     </p>

@@ -1,24 +1,35 @@
 <nav data-open="false" class="fixed top-8 left-8 z-[100] group">
-    <button class="w-20 h-20 relative bg-light rounded-full flex items-center justify-center">
+    <button class="w-20 h-20 relative bg-light drop-shadow-lg rounded-full flex items-center justify-center">
         <div class="w-24 h-24 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-dashed border-light rounded-full animate-spin"></div>
         <img class="w-1/2 h-1/2" src="/black-logo.svg" alt="NayanVR Logo">
     </button> 
     <div class="w-[1000px] h-[1000px] scale-[5] ease-in-out group-data-[open=false]:scale-0 transition-all duration-1000 bg-secondary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rounded-full">
     </div>
-    <div class="text-dark text-4xl w-screen h-screen group-data-[open=false]:scale-0 group-data-[open=false]:opacity-0 flex flex-col justify-center items-center gap-8 absolute -top-8 -left-8 -z-10 transition-all duration-1000 origin-top-left">
-        <a href="#work" class="hover:text-secondary-dark hover:tracking-widest transition-all">About Me</a>
-        <a href="#work" class="hover:text-secondary-dark hover:tracking-widest transition-all">Projects</a>
-        <a href="#work" class="hover:text-secondary-dark hover:tracking-widest transition-all">Showcase</a>
-        <a href="#work" class="hover:text-secondary-dark hover:tracking-widest transition-all">Skills</a>
-        <a href="#work" class="hover:text-secondary-dark hover:tracking-widest transition-all">Contact</a>
-    </div>
+    <ul class="text-dark text-4xl w-screen h-screen group-data-[open=false]:scale-0 group-data-[open=false]:opacity-0 flex flex-col justify-center items-center gap-8 absolute -top-8 -left-8 -z-10 transition-all duration-1000 origin-top-left">
+        <li data-section-link="about" class="hover:text-secondary-dark hover:tracking-widest cursor-pointer transition-all">About Me</li>
+        <li data-section-link="work" class="hover:text-secondary-dark hover:tracking-widest cursor-pointer transition-all">Projects</li>
+        <li data-section-link="showcase" class="hover:text-secondary-dark hover:tracking-widest cursor-pointer transition-all">Showcase</li>
+        <li data-section-link="skills" class="hover:text-secondary-dark hover:tracking-widest cursor-pointer transition-all">Skills</li>
+        <li data-section-link="contact" class="hover:text-secondary-dark hover:tracking-widest cursor-pointer transition-all">Contact</li>
+    </ul>
 </nav>
 
 <script>
     const navBtn: HTMLElement = document.querySelector('nav button');
     const nav: HTMLElement = document.querySelector('nav');
+    const navLinks: NodeListOf<HTMLElement> = document.querySelectorAll('li[data-section-link]');
 
     navBtn.addEventListener('click', () => {
         nav.dataset.open = nav.dataset.open === 'true' ? 'false' : 'true';
+    });
+
+    navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+            nav.dataset.open = 'false';
+            window.scrollTo({
+                top: document.getElementById(link.dataset.sectionLink).offsetTop - 200,
+                behavior: 'smooth'
+            });
+        });
     });
 </script>

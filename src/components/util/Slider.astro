@@ -8,7 +8,7 @@ const cardData = getCardsData(sliderName);
 ---
 
 <div class="w-full overflow-hidden relative">
-    <div class=`${sliderName} min-w-fit flex gap-8 p-4`>
+    <div class=`${sliderName} min-w-fit flex sm:gap-8 gap-4 p-4`>
         {
             cardData.map((card, i) => (
                 <a
@@ -19,13 +19,13 @@ const cardData = getCardsData(sliderName);
                             : "-rotate-3 hover:rotate-3"
                     } transition-all`}
                 >
-                    <div class="aspect-video w-80 rounded-lg border-2 border-light p-1 relative overflow-hidden">
+                    <div class="aspect-video sm:w-80 w-40 sm:rounded-lg rounded-md sm:border-2 border border-light p-1 relative overflow-hidden">
                         <img
                             src={`/work/${sliderName}/${card.imgName}`}
-                            class="w-full h-full rounded-md object-cover blur-0 group-hover:blur-sm transition-all"
+                            class="w-full h-full sm:rounded-md rounded-sm object-cover blur-0 group-hover:blur-sm transition-all"
                         />
                         <div class="absolute bottom-0 left-0 w-full h-full px-4 py-2 bg-dark-1 opacity-0 group-hover:opacity-80 transition-all" />
-                        <h1 class="absolute w-full px-8 text-lg text-center top-1/2 left-1/2 -translate-x-1/2 translate-y-0 opacity-0 group-hover:-translate-y-1/2 group-hover:opacity-100 transition-all">
+                        <h1 class="absolute w-full sm:px-8 text-sm sm:text-lg text-center top-1/2 left-1/2 -translate-x-1/2 translate-y-0 opacity-0 group-hover:-translate-y-1/2 group-hover:opacity-100 transition-all">
                             {card.title}
                         </h1>
                     </div>
