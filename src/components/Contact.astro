@@ -16,32 +16,30 @@ import StrongWord from "./util/StrongWord.astro";
                 <a href="mailto:nvrgeek@gmail.com">
                     <StrongWord text="nvrgeek@gmail.com" color="tertiary" />
                 </a>
-                <button onclick="
-                copyToClipboard()
-                ">
+                <button id="copy-email">
                     <img class="h-6 mt-1" src="/icons/copy-icon.svg" alt="copy to clipboard" />
                 </button>
             </div>
         </div>
-        <div class="sm:w-1/2 w-full max-w-sm">
+        <div class="sm:w-1/2 w-3/4 max-w-sm">
             <div class="flex gap-4">
-                <a href="https://twitter.com/nayanvr" target="_blank">
+                <a class="hover:-translate-y-2 transition-all" href="https://twitter.com/nayanvr" target="_blank">
                     <img src="/social-icons/twitter.svg" alt="Twitter" />
                 </a>
-                <a href="https://github.com/NayanVR" target="_blank">
+                <a class="hover:-translate-y-2 transition-all" href="https://github.com/NayanVR" target="_blank">
                     <img src="/social-icons/github.svg" alt="Github" />
                 </a>
-                <a href="https://www.linkedin.com/in/nayan-radadiya" target="_blank">
+                <a class="hover:-translate-y-2 transition-all" href="https://www.linkedin.com/in/nayan-radadiya" target="_blank">
                     <img src="/social-icons/linkedin.svg" alt="LinkedIn" />
                 </a>
-                <a href="https://www.instagram.com/nayan_vr" target="_blank">
+                <a class="hover:-translate-y-2 transition-all" href="https://www.instagram.com/nayan_vr" target="_blank">
                     <img src="/social-icons/instagram.svg" alt="Instagram" />
                 </a>
-                <a href="https://www.behance.net/nayanvr" target="_blank">
+                <a class="hover:-translate-y-2 transition-all" href="https://www.behance.net/nayanvr" target="_blank">
                     <img src="/social-icons/behance.svg" alt="Behance" />
                 </a>
             </div>
-            <button class="w-full py-4 mt-4 bg-secondary text-dark text-xl font-bold rounded-md hover:bg-secondary-dark transition-all">
+            <button id="download-resume" class="w-full py-4 mt-4 bg-secondary text-dark text-xl font-bold rounded-md hover:bg-secondary-dark transition-all">
                 Download Resume
             </button>
         </div>
@@ -49,5 +47,14 @@ import StrongWord from "./util/StrongWord.astro";
 </section>
 
 <script>
-    const copyToClipboard = _ => navigator.clipboard.writeText("nvrgeek@gmail.com");
+    const copyEmailBtn = document.querySelector("#copy-email");
+    const downloadResumeBtn = document.querySelector("#download-resume");
+
+    copyEmailBtn.addEventListener("click", _ => {
+        navigator.clipboard.writeText("nvrgeek@gmail.com");
+    });
+
+    downloadResumeBtn.addEventListener("click", _ => {
+        window.open("https://drive.google.com/file/d/1KDLxeS0HBRkpA3KwQs8n57EVBJJM5B3R/view?usp=sharing", "_blank");
+    });
 </script>
