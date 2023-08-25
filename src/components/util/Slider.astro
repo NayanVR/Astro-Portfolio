@@ -1,46 +1,47 @@
 ---
 import { CategoryType, getCardsData } from "../../utils/workData";
 export interface Props {
-    sliderName: CategoryType;
+  sliderName: CategoryType;
 }
 const { sliderName } = Astro.props;
 const cardData = getCardsData(sliderName);
 ---
 
 <div class="w-full overflow-hidden relative">
-    <div class=`${sliderName} min-w-fit flex sm:gap-8 gap-4 p-4`>
-        {
-            cardData.map((card, i) => (
-                <a
-                    href={card.link === "" ? "#" : card.link}
-                    class={`group ${
-                        i % 2 === 0
-                            ? "rotate-3 hover:-rotate-3"
-                            : "-rotate-3 hover:rotate-3"
-                    } transition-all`}
-                >
-                    <div class="aspect-video sm:w-80 w-40 sm:rounded-lg rounded-md sm:border-2 border border-light p-1 relative overflow-hidden">
-                        <img
-                            src={`/work/${sliderName}/${card.imgName}`}
-                            class="w-full h-full sm:rounded-md rounded-sm object-cover blur-0 group-hover:blur-sm transition-all"
-                        />
-                        <div class="absolute bottom-0 left-0 w-full h-full px-4 py-2 bg-dark-1 opacity-0 group-hover:opacity-80 transition-all" />
-                        <h1 class="absolute w-full sm:px-8 text-sm sm:text-lg text-center top-1/2 left-1/2 -translate-x-1/2 translate-y-0 opacity-0 group-hover:-translate-y-1/2 group-hover:opacity-100 transition-all">
-                            {card.title}
-                        </h1>
-                    </div>
-                </a>
-            ))
-        }
-    </div>
-    <div
-        class="absolute pointer-events-none top-0 left-0 h-full w-20 bg-gradient-to-r from-dark to-transparent"
-    >
-    </div>
-    <div
-        class="absolute pointer-events-none top-0 right-0 h-full w-20 bg-gradient-to-l from-dark to-transparent"
-    >
-    </div>
+  <div class=`${sliderName} min-w-fit flex sm:gap-8 gap-4 p-4`>
+    {
+      cardData.map((card, i) => (
+        <a
+          href={card.link === "" ? "#" : card.link}
+          class={`group ${
+            i % 2 === 0
+              ? "rotate-3 hover:-rotate-3"
+              : "-rotate-3 hover:rotate-3"
+          } transition-all`}
+        >
+          <div class="aspect-video sm:w-80 w-40 sm:rounded-lg rounded-md sm:border-2 border border-light p-1 relative overflow-hidden">
+            <img
+              src={`/work/${sliderName}/${card.imgName}`}
+              alt={card.imgName}
+              class="w-full h-full sm:rounded-md rounded-sm object-cover blur-0 group-hover:blur-sm transition-all"
+            />
+            <div class="absolute bottom-0 left-0 w-full h-full px-4 py-2 bg-dark-1 opacity-0 group-hover:opacity-80 transition-all" />
+            <h1 class="absolute w-full sm:px-8 text-sm sm:text-lg text-center top-1/2 left-1/2 -translate-x-1/2 translate-y-0 opacity-0 group-hover:-translate-y-1/2 group-hover:opacity-100 transition-all">
+              {card.title}
+            </h1>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+  <div
+    class="absolute pointer-events-none top-0 left-0 h-full w-20 bg-gradient-to-r from-dark to-transparent"
+  >
+  </div>
+  <div
+    class="absolute pointer-events-none top-0 right-0 h-full w-20 bg-gradient-to-l from-dark to-transparent"
+  >
+  </div>
 </div>
 
 <script define:vars={{ sliderName }}>

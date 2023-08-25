@@ -1,31 +1,35 @@
 ---
 export interface Props {
-    skillName: string;
+  skillName: string;
 }
 const { skillName } = Astro.props;
 ---
 
 <div
-    class="bg-[#1A1A1A] hover:bg-light w-24 h-24 flex justify-center items-center relative group transition-all duration-500"
-    style={{
-        transform: "rotateX(-60deg) rotateZ(-45deg)",
-    }}
+  class="bg-[#1A1A1A] hover:bg-light w-24 h-24 flex justify-center items-center relative group transition-all duration-500"
+  style={{
+    transform: "rotateX(-60deg) rotateZ(-45deg)",
+  }}
 >
-    <img src=`skills/${skillName}.svg` class="h-2/3 mix-blend-exclusion" />
-    <!-- left side -->
-    <div
-        class="absolute bg-dark-2 group-hover:bg-[#D0D0D0] w-6 h-full top-0 left-0 transition-all duration-500"
-        style={{
-            transform: "skewY(-45deg) translate(-100%, -0.75rem)",
-        }}
-    >
-    </div>
-    <!-- right side -->
-    <div
-        class="absolute bg- bg-dark-1 group-hover:bg-light-1 w-full h-6 bottom-0 right-0 transition-all duration-500"
-        style={{
-            transform: "skewX(-45deg) translate(0.75rem, 100%)",
-        }}
-    >
-    </div>
+  <img
+    src=`skills/${skillName}.svg`
+    alt={skillName}
+    class="h-2/3 mix-blend-exclusion"
+  />
+  <!-- left side -->
+  <div
+    class="absolute bg-dark-2 group-hover:bg-[#D0D0D0] w-6 h-full top-0 left-0 transition-all duration-500"
+    style={{
+      transform: "skewY(-45deg) translate(-100%, -0.75rem)",
+    }}
+  >
+  </div>
+  <!-- right side -->
+  <div
+    class="absolute bg- bg-dark-1 group-hover:bg-light-1 w-full h-6 bottom-0 right-0 transition-all duration-500"
+    style={{
+      transform: "skewX(-45deg) translate(0.75rem, 100%)",
+    }}
+  >
+  </div>
 </div>
