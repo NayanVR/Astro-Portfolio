@@ -1,8 +1,9 @@
 ---
 export interface Props {
+  skillIcon: string;
   skillName: string;
 }
-const { skillName } = Astro.props;
+const { skillIcon, skillName } = Astro.props;
 ---
 
 <div
@@ -11,8 +12,13 @@ const { skillName } = Astro.props;
     transform: "rotateX(-60deg) rotateZ(-45deg)",
   }}
 >
+  <div
+    class="absolute bg-light text-dark -top-1/2 left-0 p-2 text-xl rounded-md translate-x-8 translate-y-4 opacity-0 group-hover:-translate-y-4 group-hover:opacity-100 -skew-x-[45deg] transition-all duration-500"
+  >
+    {skillName}
+  </div>
   <img
-    src=`skills/${skillName}.svg`
+    src=`skills/${skillIcon}.svg`
     alt={skillName}
     class="h-2/3 mix-blend-exclusion"
   />

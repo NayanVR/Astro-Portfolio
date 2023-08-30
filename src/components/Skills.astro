@@ -2,30 +2,36 @@
 import IsometricTile from "./util/IsometricTile.astro";
 import SectionTitle from "./util/SectionTitle.astro";
 
-const skills = [
-    "html",
-    "css",
-    "js",
-    "node",
-    "reactjs",
-    "nextjs",
-    "java",
-    "astro",
-    "sass",
-    "figma",
-    "ps",
-    "ai",
-    "ae",
-];
+const skills = {
+  html: "HTML",
+  css: "CSS",
+  js: "JavaScript",
+  node: "Node.js",
+  reactjs: "React.js",
+  nextjs: "Next.js",
+  java: "Java",
+  astro: "Astro",
+  sass: "Sass",
+  figma: "Figma",
+  ps: "Photoshop",
+  ai: "Illustrator",
+  ae: "After Effects",
+};
 ---
 
 <section id="skills">
-    <SectionTitle
-        title="Let me tell you how I make these amazing things."
-        icon="pi"
-        bookmarkColor="primary"
-    />
-    <div class="my-20 sm:px-[10%] px-6 flex flex-wrap sm:gap-x-16 gap-x-12 gap-y-4 justify-center">
-        {skills.map((skill) => <IsometricTile skillName={skill} />)}
-    </div>
+  <SectionTitle
+    title="Let me tell you how I make these amazing things."
+    icon="pi"
+    bookmarkColor="primary"
+  />
+  <div
+    class="my-20 sm:px-[10%] px-6 flex flex-wrap sm:gap-x-16 gap-x-12 gap-y-4 justify-center"
+  >
+    {
+      Object.keys(skills).map((skill) => (
+        <IsometricTile skillIcon={skill} skillName={skills[skill]} />
+      ))
+    }
+  </div>
 </section>
