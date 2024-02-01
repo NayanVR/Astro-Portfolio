@@ -1,7 +1,7 @@
 ---
 export interface Props {
-    text: string;
-    color: "primary" | "secondary" | "tertiary";
+  text: string;
+  color: "primary" | "secondary" | "tertiary";
 }
 let { text, color } = Astro.props;
 text = text.replaceAll(" ", "\u00a0");
@@ -9,9 +9,10 @@ const bgClassName = `before:bg-${color}`;
 ---
 
 <span
-    class=`relative hover:text-dark transition-all before:h-[3px] before:w-full hover:before:h-full before:transition-all before:origin-bottom before:absolute before:bottom-0 before:left-0 before:-z-10 before:pointer-events-none ${bgClassName}`
-    >{text}</span
+  class=`hidden md:inline-block relative hover:text-dark transition-all before:h-[3px] before:w-full hover:before:h-full before:transition-all before:origin-bottom before:absolute before:bottom-0 before:left-0 before:-z-10 before:pointer-events-none ${bgClassName}`
+  >{text}</span
 >
+<span class="md:hidden">{text}</span>
 <!-- Dummy classes to preload tailwind classes -->
 <span class="before:bg-primary"></span>
 <span class="before:bg-secondary"></span>
