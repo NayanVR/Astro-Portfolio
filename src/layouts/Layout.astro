@@ -6,11 +6,13 @@ export interface Props {
 const { title } = Astro.props;
 
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<ClientRouter />
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />

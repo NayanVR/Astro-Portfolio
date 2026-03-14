@@ -1,0 +1,53 @@
+---
+export interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+	<head>
+		<ClientRouter />
+		<meta charset="UTF-8" />
+		<meta name="description" content={description || "Astro Blog"} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<!-- Preconnect to Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<!-- Instrument Serif and Noto Sans -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body class="bg-dark text-light font-blog-sans antialiased min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
+        <!-- Separate blog navigation -->
+        <nav class="w-full py-8 px-5 md:px-10 max-w-5xl mx-auto flex justify-between items-center bg-transparent">
+            <a href="/blog" class="font-serif text-3xl font-bold tracking-tight text-light">
+                NVR<span class="text-primary italic">.blog</span>
+            </a>
+            <div class="flex gap-4 items-center">
+                <a href="/" class="text-sm font-semibold tracking-wide text-light/60 hover:text-primary transition-colors hover:-translate-x-1 duration-300 transform">
+                    &larr; MAIN PORTFOLIO
+                </a>
+            </div>
+        </nav>
+
+        <main class="flex-grow w-full max-w-5xl mx-auto px-5 md:px-10 py-12">
+		    <slot />
+        </main>
+
+        <footer class="w-full py-12 text-center text-sm font-medium tracking-wide text-light/40 mt-auto border-t border-light/10 max-w-5xl mx-auto">
+            &copy; {new Date().getFullYear()} NayanVR. All thoughts are my own.
+        </footer>
+	</body>
+</html>

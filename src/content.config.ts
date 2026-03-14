@@ -8,7 +8,8 @@ const blogCollection = defineCollection({
         pubDate: z.date(),
         description: z.string(),
         author: z.enum(["NayanVR"]),
-        tags: z.array(z.enum(["astro", "blogging", "learning in public"]))
+        category: z.string(),
+        tags: z.array(z.string())
     }),
 });
 

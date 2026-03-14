@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-dark: #050505;
@@ -6,14 +7,16 @@
   --color-dark-2: #242424;
   --color-light: #F6F6F6;
   --color-light-1: #9A9A9A;
-  --color-primary: #2667FF;
-  --color-primary-dark: #3B28CC;
-  --color-secondary: #FFC700;
-  --color-secondary-dark: #F2A000;
+  --color-primary: #FFC700;
+  --color-primary-dark: #F2A000;
+  --color-secondary: #2667FF;
+  --color-secondary-dark: #3B28CC;
   --color-tertiary: #4CC700;
   --color-tertiary-dark: #0C9B00;
   
   --font-sans: "JetBrains Mono", sans-serif;
+  --font-blog-sans: "Noto Sans", sans-serif;
+  --font-serif: "Instrument Serif", serif;
   
   --animate-spin: spin 10s linear infinite;
   --animate-wave: wave 1.5s alternate ease infinite;

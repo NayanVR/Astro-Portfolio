@@ -1,15 +1,67 @@
 ---
 import { getCollection } from "astro:content";
+import BlogLayout from "../../layouts/BlogLayout.astro";
 
-const blogPosts = await getCollection("blog");
+// Sort posts by descending publication date
+const blogPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Extract unique categories
+const categories = [...new Set(blogPosts.map((post) => post.data.category))].filter(Boolean);
 ---
 
-{
-    blogPosts.map((post) => (
-        <div>
-            <h2>{post.data.title}</h2>
-            <p>{post.data.description}</p>
-            <a href={`/blog/${post.slug}/`}>Read more</a>
-        </div>
-    ))
-}
+<BlogLayout title="Blog | NayanVR" description="Thoughts, tutorials, and more.">
+  <div class="space-y-16">
+    <!-- Header -->
+    <header class="space-y-6">
+      <h1 class="text-6xl md:text-7xl font-serif font-bold text-light tracking-tight">
+        Writings
+      </h1>
+      <p class="text-xl text-light/60 font-blog-sans max-w-2xl leading-relaxed">
+        A premium collection of my thoughts on design, development, virtual reality, and life in general.
+      </p>
+    </header>
+
+    <!-- Categories Filters -->
+    {categories.length > 0 && (
+      <div class="flex flex-wrap gap-4 pb-12 border-b border-light/10">
+        <span class="text-sm font-bold uppercase tracking-widest text-light/40 mr-2 py-2 flex items-center">Topics:</span>
+        {categories.map((cat) => (
+          <a
+            href={`/blog/category/${cat.toLowerCase()}`}
+            class="px-5 py-2.5 bg-dark-1 border border-light/10 shadow-sm hover:border-primary hover:text-primary rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md"
+          >
+            {cat}
+          </a>
+        ))}
+      </div>
+    )}
+
+    <!-- Posts Grid -->
+    <div class="grid gap-12 sm:grid-cols-2 lg:gap-16">
+      {blogPosts.map((post) => (
+        <article class="group flex flex-col items-start justify-between space-y-5">
+          <div class="flex items-center gap-x-4 text-xs font-semibold tracking-wide">
+            <time datetime={post.data.pubDate.toISOString()} class="text-light/50">
+              {post.data.pubDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+            </time>
+            <span class="text-light/30">•</span>
+            <a href={`/blog/category/${post.data.category.toLowerCase()}`} class="text-primary hover:text-primary-dark transition-colors uppercase">
+              {post.data.category}
+            </a>
+          </div>
+          <div class="group relative">
+            <h3 class="text-3xl font-serif font-bold leading-tight text-light group-hover:text-primary transition-colors decoration-primary decoration-2 underline-offset-4 group-hover:underline">
+              <a href={`/blog/${post.id}/`}>
+                <span class="absolute inset-0"></span>
+                <span transition:name={`title-${post.id}`}>{post.data.title}</span>
+              </a>
+            </h3>
+            <p class="mt-4 line-clamp-3 text-lg leading-relaxed text-light/70">{post.data.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</BlogLayout>
