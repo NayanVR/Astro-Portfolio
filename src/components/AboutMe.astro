@@ -1,6 +1,9 @@
 ---
 import SectionTitle from "./util/SectionTitle.astro";
 import StrongWord from "./util/StrongWord.astro";
+
+const age = Date.now() - new Date("2003-08-08").getTime();
+const ageInYears = new Date(age).getUTCFullYear() - 1970;
 ---
 
 <section id="about" class="w-full">
@@ -13,8 +16,8 @@ import StrongWord from "./util/StrongWord.astro";
         class="list-disc list-outside mx-[10%] my-20 sm:text-xl font-normal flex flex-col gap-8"
     >
         <li>
-            I am a 20-year-old computer science engineering student residing in <StrongWord
-                text="Gujarat, India."
+            I am a {ageInYears} year old computer science engineering student residing in <StrongWord
+                text="Bengaluru, India."
                 color="primary"
             />
         </li>
