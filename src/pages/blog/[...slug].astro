@@ -1,9 +1,9 @@
 ---
-import { CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog"); 
+  const posts = await getCollection("blog");
   return posts.map((post) => {
     return {
       params: { slug: post.id },
@@ -42,8 +42,8 @@ const { Content } = await render(post);
 
     <!-- Post Content via tailwind typography -->
     <div class="prose prose-lg prose-invert mx-auto
-      prose-headings:font-serif prose-headings:font-bold prose-headings:text-light 
-      prose-p:text-light/80 prose-p:leading-relaxed 
+      prose-headings:font-serif prose-headings:font-bold prose-headings:text-light
+      prose-p:text-light/80 prose-p:leading-relaxed
       prose-a:text-primary prose-a:no-underline hover:prose-a:underline hover:prose-a:underline-offset-4
       prose-img:rounded-2xl prose-img:shadow-xl
       prose-strong:text-light
