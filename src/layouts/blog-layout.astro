@@ -1,13 +1,13 @@
 ---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
 export interface Props {
 	title: string;
 	description?: string;
 }
 
 const { title, description } = Astro.props;
-
-import { ClientRouter } from 'astro:transitions';
-import '../styles/global.css';
 ---
 
 <!DOCTYPE html>

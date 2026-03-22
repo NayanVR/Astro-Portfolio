@@ -52,34 +52,32 @@
 </nav>
 
 <script>
-  const navBtn: HTMLElement = document.querySelector("nav button");
-  const nav: HTMLElement = document.querySelector("nav");
+// oxlint-disable typescript/no-non-null-assertion
+  const navBtn: HTMLElement = document.querySelector("nav button")!;
+  const nav: HTMLElement = document.querySelector("nav")!;
   const navLinks: NodeListOf<HTMLElement> = document.querySelectorAll(
     "li[data-section-link]"
   );
 
-  navBtn.addEventListener("click", () => {
-    nav.dataset.open = nav.dataset.open === "true" ? "false" : "true";
+  navBtn?.addEventListener("click", () => {
+    nav!.dataset.open = nav?.dataset.open === "true" ? "false" : "true";
   });
 
-  navLinks.forEach((link) => {
+  for (const link of navLinks) {
     link.addEventListener("click", () => {
-      nav.dataset.open = "false";
+      nav!.dataset.open = "false";
       window.scrollTo({
-        top: document.getElementById(link.dataset.sectionLink).offsetTop - 200,
         behavior: "smooth",
+        // oxlint-disable-next-line unicorn/prefer-query-selector
+        top: document.getElementById(link.dataset.sectionLink!)!.offsetTop - 200,
       });
     });
-  });
+  };
 
   let lastScroll = 0;
 
   document.addEventListener("scroll", () => {
-    if (window.scrollY > lastScroll) {
-      navBtn.classList.add("-translate-y-36");
-    } else {
-      navBtn.classList.remove("-translate-y-36");
-    }
+    navBtn.classList.toggle("-translate-y-36", window.scrollY > lastScroll);
     lastScroll = window.scrollY;
   });
 </script>

@@ -1,7 +1,7 @@
 <div class="fixed top-0 right-0 h-screen p-8 z-1000 bg-linear-to-r from-transparent via-transparent to-dark hidden sm:block">
     <div class="flex flex-col h-full items-center">
         <div data-breakpoint="Hero" data-active="true" class="min-w-4 min-h-4 border-2 border-dark-2 bg-dark data-[active=true]:bg-white data-[active=true]:border-0 transition-all rounded-full relative cursor-pointer after:absolute after:content-[attr(data-breakpoint)] after:text-dark after:bg-light after:right-6 after:top-1/2 after:-translate-y-1/2 after:px-2 after:py-1 after:rounded-md hover:after:scale-100 after:scale-0 after:transition-all after:origin-right"></div>
-        
+
         <div class="w-0.5 h-full bg-dark-2">
             <div data-progress style="height: 50%;" class="w-full bg-white"></div>
         </div>
@@ -27,63 +27,69 @@
 
 <script>
 const sectionTitles = document.querySelectorAll('[data-section-title]');
-const breakpoints: HTMLElement[] = Array.from(document.querySelectorAll('[data-breakpoint]'));
-const progressBars: HTMLElement[] = Array.from(document.querySelectorAll('[data-progress]'));
+const breakpoints: HTMLElement[] = [...document.querySelectorAll('[data-breakpoint]')] as HTMLElement[];
+const progressBars: HTMLElement[] = [...document.querySelectorAll('[data-progress]')] as HTMLElement[];
 const vH = window.innerHeight;
-const topOfTitles = [];
+const topOfTitles: number[] = [];
 
-sectionTitles.forEach(title => {
+for (const title of sectionTitles) {
     topOfTitles.push(title.getBoundingClientRect().top + window.scrollY);
-});
+};
 
 // adds 0px for hero section (temp)
 topOfTitles.unshift(1);
 
 // scroll on click
-breakpoints.forEach((breakpoint, index) => {
+for (let index = 0; index < breakpoints.length; index += 1) {
+    const breakpoint = breakpoints[index];
+
     breakpoint.addEventListener('click', () => {
         window.scrollTo({
-            top: (topOfTitles[index-1] - vH / 2) + 10,
-            behavior: 'smooth'
+            behavior: 'smooth',
+            top: (topOfTitles[index-1] - vH / 2) + 10
         });
     });
-});
+};
 
 topOfTitles.shift();
 breakpoints.shift();
 
 // Progress bar logic
-window.onscroll = () => {
+window.addEventListener('scroll', () => {
+
     const scrollPosition = window.scrollY;
     let sectionIndex = 0;
 
-    breakpoints.forEach((breakpoint, index) => {
+    for (let index = 0; index < breakpoints.length; index += 1) {
+        const breakpoint = breakpoints[index];
         const hasCrossed = scrollPosition >= topOfTitles[index] - vH / 2;
         breakpoint.dataset.active = hasCrossed ? "true" : "false";
         if (hasCrossed) {
-            sectionIndex = index + 1; // coz there are n bars and n + 1 breakpoints
+            // coz there are n bars and n + 1 breakpoints
+            sectionIndex = index + 1;
             return;
         }
-    });
+    };
 
     if (sectionIndex === 5) {
         progressBars[sectionIndex - 1].style.height = `100%`;
         return;
     }
 
-    let topOfSection = sectionIndex === 0 ? 0 : topOfTitles[sectionIndex - 1];
-    let bottomOfSection = topOfTitles[sectionIndex];
+    const topOfSection = sectionIndex === 0 ? 0 : topOfTitles[sectionIndex - 1];
+    const bottomOfSection = topOfTitles[sectionIndex];
 
     const progress = (scrollPosition - topOfSection + (vH/2)) / (bottomOfSection - topOfSection);
     progressBars[sectionIndex].style.height = `${progress * 100}%`;
 
-    progressBars.forEach((progressBar, index) => {
+    for (let index = 0; index < progressBars.length; index += 1) {
+        const progressBar = progressBars[index];
         if (index > sectionIndex) {
             progressBar.style.height = `0%`;
         }
         if (index < sectionIndex) {
             progressBar.style.height = `100%`;
         }
-    });
-}
+    };
+});
 </script>

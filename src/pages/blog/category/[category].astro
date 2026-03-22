@@ -1,7 +1,8 @@
 ---
-import BlogLayout from "../../../layouts/BlogLayout.astro";
+import BlogLayout from "../../../layouts/blog-layout.astro";
 import { getCollection } from "astro:content";
 
+// oxlint-disable-next-line func-style
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
   const uniqueCategories = [
@@ -11,11 +12,11 @@ export async function getStaticPaths() {
   return uniqueCategories.map((category) => {
     const filteredPosts = allPosts.filter(
       (post) => post.data.category === category
-    ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    ).toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
     return {
       params: { category: category.toLowerCase() },
-      props: { posts: filteredPosts, categoryName: category },
+      props: { categoryName: category, posts: filteredPosts },
     };
   });
 }

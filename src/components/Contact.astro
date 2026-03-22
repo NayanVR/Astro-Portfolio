@@ -1,6 +1,6 @@
 ---
-import SectionTitle from "./util/SectionTitle.astro";
-import StrongWord from "./util/StrongWord.astro";
+import SectionTitle from "./util/section-title.astro";
+import StrongWord from "./util/strong-word.astro";
 ---
 
 <section id="contact">
@@ -79,11 +79,11 @@ import StrongWord from "./util/StrongWord.astro";
   const copyEmailBtn = document.querySelector("#copy-email");
   const downloadResumeBtn = document.querySelector("#download-resume");
 
-  copyEmailBtn.addEventListener("click", (_) => {
+  copyEmailBtn?.addEventListener("click", (_) => {
     navigator.clipboard.writeText("nvrgeek@gmail.com");
   });
 
-  downloadResumeBtn.addEventListener("click", (_) => {
+  downloadResumeBtn?.addEventListener("click", (_) => {
     window.open(
       "https://drive.google.com/file/d/1KDLxeS0HBRkpA3KwQs8n57EVBJJM5B3R/view?usp=sharing",
       "_blank"

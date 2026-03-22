@@ -20,24 +20,25 @@
     </div>
 
     <script>
-        const gridContainer = document.getElementById("grid-container")!;
-        const cursor = document.getElementById("hero-cursor")!;
+// oxlint-disable typescript/no-non-null-assertion
+        const gridContainer: HTMLElement = document.querySelector("#grid-container")!;
+        const cursor: HTMLElement = document.querySelector("#hero-cursor")!;
 
-        const columns = parseInt(`${window.innerWidth / 30}`);
-        const rows = parseInt(`${window.innerHeight / 30}`);
+        const columns = Number.parseInt(`${window.innerWidth / 30}`);
+        const rows = Number.parseInt(`${window.innerHeight / 30}`);
 
         gridContainer.style.setProperty("--columns", columns.toString());
         gridContainer.style.setProperty("--rows", rows.toString());
 
         const TILE_BASE_OPACITY = 0.1;
 
-        let mousePos = {
+        const mousePos = {
+            radius: 200,
             x: 0,
             y: 0,
-            radius: 200,
         };
 
-        let tiles: { elem: HTMLDivElement; x: number; y: number }[] = [];
+        const tiles: { elem: HTMLDivElement; x: number; y: number }[] = [];
 
         const handleMouseMove = (e) => {
             mousePos.x = e.clientX;
@@ -52,14 +53,14 @@
             tile.classList.add("tile");
             const dot = document.createElement("div");
             dot.classList.add("dot");
-            tile.appendChild(dot);
+            tile.append(dot);
             return tile;
         };
 
         const createTiles = (quantity) => {
             for (let i = 0; i < quantity; i++) {
                 const tile = createTile(i);
-                gridContainer.appendChild(tile);
+                gridContainer.append(tile);
                 tiles.push({ elem: tile, x: 0, y: 0 });
             }
             tiles.forEach((tile, index) => {
@@ -71,14 +72,12 @@
 
         createTiles(columns * rows);
 
+        // oxlint-disable-next-line func-style
         function animate() {
             requestAnimationFrame(animate);
 
-            tiles.forEach((tile, index) => {
-                const distance = Math.sqrt(
-                    Math.pow(mousePos.x - tile.x, 2) +
-                        Math.pow(mousePos.y - tile.y, 2)
-                );
+            for (const tile of tiles) {
+                const distance = Math.hypot(mousePos.x - tile.x, mousePos.y - tile.y);
                 const radius = mousePos.radius - distance;
                 const opacity = Math.max(radius / 500, TILE_BASE_OPACITY);
                 if (radius > 0) {
@@ -91,9 +90,8 @@
                     tile.elem.style.opacity = "0.1";
                     tile.elem.style.transform = "scale(1)";
                 }
-            });
+            }
         }
-
         animate();
     </script>
 

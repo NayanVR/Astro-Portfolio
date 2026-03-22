@@ -1,14 +1,16 @@
 ---
 import { getCollection } from "astro:content";
-import BlogLayout from "../../layouts/BlogLayout.astro";
+import BlogLayout from "../../layouts/blog-layout.astro";
+
+const blogPosts = await getCollection("blog");
 
 // Sort posts by descending publication date
-const blogPosts = (await getCollection("blog")).sort(
+const sortedBlogPosts = blogPosts.toSorted(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
 // Extract unique categories
-const categories = [...new Set(blogPosts.map((post) => post.data.category))].filter(Boolean);
+const categories = [...new Set(sortedBlogPosts.map((post) => post.data.category))].filter(Boolean);
 ---
 
 <BlogLayout title="Blog | NayanVR" description="Thoughts, tutorials, and more.">
@@ -40,7 +42,7 @@ const categories = [...new Set(blogPosts.map((post) => post.data.category))].fil
 
     <!-- Posts Grid -->
     <div class="grid gap-12 sm:grid-cols-2 lg:gap-16">
-      {blogPosts.map((post) => (
+      {sortedBlogPosts.map((post) => (
         <article class="group flex flex-col items-start justify-between space-y-5">
           <div class="flex items-center gap-x-4 text-xs font-semibold tracking-wide">
             <time datetime={post.data.pubDate.toISOString()} class="text-light/50">
