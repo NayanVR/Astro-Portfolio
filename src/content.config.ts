@@ -4,7 +4,7 @@ import { defineCollection, z } from "astro:content";
 const blogCollection = defineCollection({
   loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
-    author: z.enum(["NayanVR"]),
+    author: z.enum(["Nayan"]),
     category: z.string(),
     description: z.string(),
     pubDate: z.date(),
