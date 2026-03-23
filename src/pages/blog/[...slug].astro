@@ -1,60 +1,87 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { getCollection, render } from 'astro:content';
-import BlogLayout from "../../layouts/blog-layout.astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
+import BlogLayout from "../../layouts/BlogLayout.astro";
 
 // oxlint-disable-next-line func-style
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
-      params: { slug: post.id },
-      props: { post }
-    }));
+    params: { slug: post.id },
+    props: { post },
+  }));
 }
 
 interface Props {
-  post: CollectionEntry<"blog">
+  post: CollectionEntry<"blog">;
 }
 
 const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogLayout title={`${post.data.title} | NayanVR Blog`} description={post.data.description}>
+<BlogLayout
+  title={`${post.data.title} | NayanVR Blog`}
+  description={post.data.description}
+>
   <article class="mx-auto w-full max-w-3xl">
     <!-- Post Header -->
     <header class="mb-16 text-center flex flex-col items-center">
-      <a href={`/blog/category/${post.data.category.toLowerCase()}`} class="mb-8 px-6 py-2 rounded-full border border-primary/20 bg-primary/5 text-sm font-bold tracking-widest text-primary hover:bg-primary/10 transition-colors uppercase">
+      <a
+        href={`/blog/category/${post.data.category.toLowerCase()}`}
+        class="mb-8 px-6 py-2 rounded-full border border-primary/20 bg-primary/5 text-sm font-bold tracking-widest text-primary hover:bg-primary/10 transition-colors uppercase"
+      >
         {post.data.category}
       </a>
-      <h1 class="mb-8 text-5xl md:text-6xl font-serif font-black text-light leading-[1.15]">
+      <h1
+        class="mb-8 text-5xl md:text-6xl font-serif font-black text-light leading-[1.15]"
+      >
         <span transition:name={`title-${post.id}`}>{post.data.title}</span>
       </h1>
-      <div class="flex items-center justify-center gap-x-4 text-sm font-medium text-light/60">
+      <div
+        class="flex items-center justify-center gap-x-4 text-sm font-medium text-light/60"
+      >
         <time datetime={post.data.pubDate.toISOString()}>
-          {post.data.pubDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+          {
+            post.data.pubDate.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })
+          }
         </time>
         <span class="w-1.5 h-1.5 rounded-full bg-light/20"></span>
-        <span>Written by <span class="text-light font-semibold">{post.data.author}</span></span>
+        <span
+          >Written by <span class="text-light font-semibold"
+            >{post.data.author}</span
+          ></span
+        >
       </div>
     </header>
 
     <!-- Post Content via tailwind typography -->
-    <div class="prose prose-lg prose-invert mx-auto
+    <div
+      class="prose prose-lg prose-invert mx-auto
       prose-headings:font-serif prose-headings:font-bold prose-headings:text-light
       prose-p:text-light/90 prose-p:leading-relaxed prose-p:text-justify
       prose-a:text-primary prose-a:no-underline hover:prose-a:underline hover:prose-a:underline-offset-4
       prose-img:rounded-2xl prose-img:shadow-xl
       prose-strong:text-light
       prose-blockquote:border-l-primary prose-blockquote:bg-primary/5 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:font-serif prose-blockquote:italic
-      marker:text-primary">
+      marker:text-primary"
+    >
       <Content />
     </div>
 
     <!-- Article Footer -->
     <div class="mt-20 pt-10 border-t border-light/10 text-center">
-      <h3 class="font-serif font-bold text-2xl text-light mb-6">Enjoyed this post?</h3>
-      <a href="/blog" class="inline-block px-8 py-3 bg-light text-dark font-semibold rounded-full hover:bg-primary hover:text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+      <h3 class="font-serif font-bold text-2xl text-light mb-6">
+        Enjoyed this post?
+      </h3>
+      <a
+        href="/blog"
+        class="inline-block px-8 py-3 bg-light text-dark font-semibold rounded-full hover:bg-primary hover:text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+      >
         Read more articles
       </a>
     </div>

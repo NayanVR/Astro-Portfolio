@@ -1,6 +1,6 @@
 ---
-import BlogLayout from "../../../layouts/blog-layout.astro";
 import { getCollection } from "astro:content";
+import BlogLayout from "../../../layouts/BlogLayout.astro";
 
 // oxlint-disable-next-line func-style
 export async function getStaticPaths() {
@@ -10,9 +10,9 @@ export async function getStaticPaths() {
   ];
 
   return uniqueCategories.map((category) => {
-    const filteredPosts = allPosts.filter(
-      (post) => post.data.category === category
-    ).toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    const filteredPosts = allPosts
+      .filter((post) => post.data.category === category)
+      .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
     return {
       params: { category: category.toLowerCase() },
@@ -25,41 +25,68 @@ const { category } = Astro.params;
 const { posts, categoryName } = Astro.props;
 ---
 
-<BlogLayout title={`${categoryName} Posts | NayanVR Blog`} description={`Read all posts about ${categoryName}`}>
+<BlogLayout
+  title={`${categoryName} Posts | NayanVR Blog`}
+  description={`Read all posts about ${categoryName}`}
+>
   <div class="space-y-16">
     <!-- Header -->
     <header class="space-y-6">
       <div class="flex items-center gap-3 mb-6">
-        <a href="/blog" class="text-sm font-semibold tracking-wide text-light/40 hover:text-light uppercase transition-colors">All Posts</a>
+        <a
+          href="/blog"
+          class="text-sm font-semibold tracking-wide text-light/40 hover:text-light uppercase transition-colors"
+          >All Posts</a
+        >
         <span class="text-light/20">/</span>
-        <span class="text-sm font-bold tracking-wide text-primary uppercase">{categoryName}</span>
+        <span class="text-sm font-bold tracking-wide text-primary uppercase"
+          >{categoryName}</span
+        >
       </div>
-      <h1 class="text-5xl md:text-6xl font-serif font-bold text-light">{categoryName}</h1>
+      <h1 class="text-5xl md:text-6xl font-serif font-bold text-light">
+        {categoryName}
+      </h1>
       <p class="text-xl text-light/60 font-blog-sans max-w-2xl">
-        Showing {posts.length} {posts.length === 1 ? "post" : "posts"} in this category.
+        Showing {posts.length}
+        {posts.length === 1 ? "post" : "posts"} in this category.
       </p>
     </header>
 
     <!-- Posts Grid -->
-    <div class="grid gap-12 sm:grid-cols-2 lg:gap-16 pt-12 border-t border-light/10">
-      {posts.map((post) => (
-        <article class="group flex flex-col items-start justify-between space-y-5">
-          <div class="flex items-center gap-x-4 text-xs font-semibold tracking-wide">
-            <time datetime={post.data.pubDate.toISOString()} class="text-light/50">
-              {post.data.pubDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
-            </time>
-          </div>
-          <div class="group relative">
-            <h3 class="text-3xl font-serif font-bold leading-tight text-light group-hover:text-primary transition-colors decoration-primary decoration-2 underline-offset-4 group-hover:underline">
-              <a href={`/blog/${post.id}/`}>
-                <span class="absolute inset-0"></span>
-                <span transition:name={`title-${post.id}`}>{post.data.title}</span>
-              </a>
-            </h3>
-            <p class="mt-4 line-clamp-3 text-lg leading-relaxed text-light/70">{post.data.description}</p>
-          </div>
-        </article>
-      ))}
+    <div
+      class="grid gap-12 sm:grid-cols-2 lg:gap-16 pt-12 border-t border-light/10"
+    >
+      {
+        posts.map((post) => (
+          <article class="group flex flex-col items-start justify-between space-y-5">
+            <div class="flex items-center gap-x-4 text-xs font-semibold tracking-wide">
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="text-light/50"
+              >
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </time>
+            </div>
+            <div class="group relative">
+              <h3 class="text-3xl font-serif font-bold leading-tight text-light group-hover:text-primary transition-colors decoration-primary decoration-2 underline-offset-4 group-hover:underline">
+                <a href={`/blog/${post.id}/`}>
+                  <span class="absolute inset-0" />
+                  <span transition:name={`title-${post.id}`}>
+                    {post.data.title}
+                  </span>
+                </a>
+              </h3>
+              <p class="mt-4 line-clamp-3 text-lg leading-relaxed text-light/70">
+                {post.data.description}
+              </p>
+            </div>
+          </article>
+        ))
+      }
     </div>
   </div>
 </BlogLayout>

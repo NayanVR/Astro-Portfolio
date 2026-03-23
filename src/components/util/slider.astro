@@ -1,6 +1,6 @@
 ---
-import type { CategoryType} from "../../utils/work-data";
-import { getCardsData } from "../../utils/work-data";
+import type { CategoryType } from "../../utils/WorkData";
+import { getCardsData } from "../../utils/WorkData";
 export interface Props {
   sliderName: CategoryType;
 }
@@ -46,22 +46,22 @@ const cardData = getCardsData(sliderName);
 </div>
 
 <script define:vars={{ sliderName }}>
-const slides = document.querySelectorAll(`.${sliderName} > a`);
-const slider = document.querySelector(`.${sliderName}`);
+  const slides = document.querySelectorAll(`.${sliderName} > a`);
+  const slider = document.querySelector(`.${sliderName}`);
 
-// Duplicate slides so that the slider can loop
-for (const slide of slides) {
+  // Duplicate slides so that the slider can loop
+  for (const slide of slides) {
     slider.append(slide.cloneNode(true));
-};
+  }
 
-let lastPos = 0;
-const repeatPoint = slider.clientWidth / 2;
+  let lastPos = 0;
+  const repeatPoint = slider.clientWidth / 2;
 
-// oxlint-disable-next-line func-style
-function animateSlider() {
+  // oxlint-disable-next-line func-style
+  function animateSlider() {
     slider.style.transform = `translateX(-${lastPos}px)`;
     lastPos = lastPos >= repeatPoint ? 0 : lastPos + 1;
     requestAnimationFrame(animateSlider);
-}
-animateSlider();
+  }
+  animateSlider();
 </script>

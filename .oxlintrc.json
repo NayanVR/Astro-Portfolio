@@ -3,5 +3,8 @@
   "extends": [
     "./node_modules/ultracite/config/oxlint/core/.oxlintrc.json",
     "./node_modules/ultracite/config/oxlint/astro/.oxlintrc.json"
-  ]
+  ],
+  "rules": {
+    "unicorn/filename-case": "off"
+  }
 }

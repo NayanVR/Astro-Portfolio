@@ -1,0 +1,44 @@
+---
+import SectionTitle from "./util/SectionTitle.astro";
+import StrongWord from "./util/StrongWord.astro";
+
+const age = Date.now() - new Date("2003-08-08").getTime();
+const ageInYears = new Date(age).getUTCFullYear() - 1970;
+---
+
+<section id="about" class="w-full">
+  <SectionTitle
+    title="You're probably wondering who I am?"
+    icon="question"
+    bookmarkColor="primary"
+  />
+  <ul
+    class="list-disc list-outside mx-[10%] my-20 sm:text-xl font-normal flex flex-col gap-8"
+  >
+    <li>
+      I am a {ageInYears} year old computer science engineering student residing in
+      <StrongWord text="Bengaluru, India." color="primary" />
+    </li>
+    <li>
+      I love to do <StrongWord
+        text="FullStack Web Development"
+        color="primary"
+      />, <StrongWord text="Graphic Designing" color="tertiary" /> & <StrongWord
+        text="UI/UX Designing."
+        color="secondary"
+      />
+    </li>
+    <li>
+      People say I'm good at <StrongWord
+        text="FrontEnd Development"
+        color="secondary"
+      />, Logo Design & Social Media Management.
+    </li>
+    <li>
+      Apart from these things I love to do <StrongWord
+        text="content creation (youtube)"
+        color="tertiary"
+      /> and video editing.
+    </li>
+  </ul>
+</section>

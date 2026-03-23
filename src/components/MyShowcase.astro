@@ -1,0 +1,48 @@
+---
+import SectionTitle from "./util/SectionTitle.astro";
+import ShowcaseCard from "./util/ShowcaseCard.astro";
+---
+
+<section id="showcase">
+  <SectionTitle
+    title="Here are some things that I want to show you."
+    icon="lambda"
+    bookmarkColor="tertiary"
+  />
+  <div class="md:mx-20 mx-2 my-20 flex justify-center">
+    <div
+      class="grid grid-cols-5 grid-rows-6 md:gap-8 w-full max-w-4xl aspect-5/6"
+    >
+      <div class="col-span-3 row-span-2">
+        <ShowcaseCard
+          imageName="chatbot-reward"
+          desc="Received a cash reward for developing a chatbot specifically designed for my University."
+        />
+      </div>
+      <div class="col-span-2 row-span-4 col-start-1 row-start-3">
+        <ShowcaseCard
+          imageName="planetscale"
+          desc="Gave a talk on how to use PlanetScale Branching. Surprisingly my tweet got liked by well-known creators and ceo of PlanetScale."
+        />
+      </div>
+      <div class="col-span-2 row-span-4 col-start-4 row-start-1">
+        <ShowcaseCard
+          imageName="github-award"
+          desc="Got a puzzle award from github at open-source event for drawing creative version of octacat."
+        />
+      </div>
+      <div class="col-span-3 row-span-2 col-start-3 row-start-5">
+        <ShowcaseCard
+          imageName="best-kalakar"
+          desc="Received an award for being best kalakar (designer) in annual fest of my university."
+        />
+      </div>
+      <div class="row-span-2 col-start-3 row-start-3">
+        <ShowcaseCard
+          imageName="vb-badge"
+          desc="Got best performer badge at Vadodara Bucketlist."
+        />
+      </div>
+    </div>
+  </div>
+</section>
