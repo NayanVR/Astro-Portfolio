@@ -1,0 +1,268 @@
+---
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+if (!turnstileSiteKey) {
+  console.error("Turstile site key is not defined");
+}
+---
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
+
+<section aria-label="Newsletter subscription" class="relative my-16 isolate">
+  <!-- Ambient glow -->
+  <div
+    class="absolute -inset-x-4 inset-y-0 -z-10 rounded-3xl bg-primary/4 blur-2xl"
+  ></div>
+
+  <!-- Card -->
+  <div
+    class="relative overflow-hidden rounded-2xl border border-light/10 bg-dark px-8 py-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] md:px-10"
+  >
+    <!-- Top shimmer line -->
+    <div
+      class="absolute top-0 left-1/2 h-px w-32 -translate-x-1/2 bg-linear-to-r from-transparent via-primary/55 to-transparent"
+    ></div>
+
+    <!-- Surface sheen layers -->
+    <div class="pointer-events-none absolute inset-0 bg-linear-to-b from-white/[0.04] via-transparent to-transparent"></div>
+    <div class="pointer-events-none absolute inset-0 bg-radial-[at_15%_0%] from-white/[0.05] via-transparent to-transparent"></div>
+    <div class="pointer-events-none absolute inset-0 bg-radial-[at_100%_100%] from-primary/[0.04] via-transparent to-transparent"></div>
+
+    <!-- Layout: text left, form right -->
+    <div class="flex flex-col gap-6 md:flex-row md:items-center md:gap-10">
+      <!-- Left: copy -->
+      <div class="shrink-0 md:max-w-55 md:self-center">
+        <div class="mb-1 flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 shrink-0 text-primary"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+            ></path>
+          </svg>
+          <h2 class="font-serif font-black text-xl text-light">
+            Stay in the loop
+          </h2>
+        </div>
+        <p class="text-sm leading-relaxed text-light/40">
+          No spam. Even I don't like it.
+        </p>
+      </div>
+
+      <!-- Right: form -->
+      <div id="subscribe-form-wrapper" class="min-w-0 flex-1">
+        <form id="subscribe-form" novalidate class="flex flex-col gap-2">
+          <div
+            class="grid overflow-hidden rounded-xl border border-light/12 bg-dark shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+            style="grid-template-columns: 1fr auto; grid-template-rows: 1fr 1fr;"
+          >
+            <input
+              type="text"
+              id="subscribe-name"
+              name="name"
+              placeholder="Your name"
+              autocomplete="given-name"
+              required
+              class="col-start-1 row-start-1 border-b border-r border-light/12 bg-transparent px-4 py-3 text-sm text-light placeholder-light/35 outline-none transition-all duration-200 focus:bg-dark-1/40"
+            />
+            <input
+              type="email"
+              id="subscribe-email"
+              name="email"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+              class="col-start-1 row-start-2 border-r border-light/12 bg-transparent px-4 py-3 text-sm text-light placeholder-light/35 outline-none transition-all duration-200 focus:bg-dark-1/40"
+            />
+            <button
+              type="submit"
+              id="subscribe-btn"
+              aria-label="Subscribe"
+              class="group col-start-2 row-start-1 row-span-2 aspect-square h-full flex items-center justify-center bg-primary text-dark shadow-[inset_0_1px_0_rgba(255,255,255,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] hover:bg-primary-dark hover:shadow-[0_0_24px_rgba(255,216,77,0.45),inset_0_1px_0_rgba(255,255,255,0.32)] active:translate-y-0 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:scale-100 disabled:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]"
+            >
+              <svg
+                id="subscribe-btn-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:rotate-6 group-active:translate-x-0.5 group-active:-translate-y-0.5 group-active:rotate-3"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+              </svg>
+              <svg
+                id="subscribe-spinner"
+                class="hidden h-5 w-5 animate-spin"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="mt-2">
+            <div
+              id="turnstile-container"
+              class="cf-turnstile"
+              data-sitekey={turnstileSiteKey}
+              data-theme="dark"
+              data-size="flexible"
+            ></div>
+          </div>
+        </form>
+
+        <!-- Error message -->
+        <p
+          id="subscribe-error"
+          role="alert"
+          class="mt-2 hidden px-1 text-xs font-medium text-red-400"
+        ></p>
+      </div>
+
+      <!-- Success state (hidden by default) -->
+      <div
+        id="subscribe-success"
+        class="hidden min-w-0 flex-1 flex items-center gap-3"
+        aria-live="polite"
+      >
+        <div
+          class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-tertiary/25 bg-tertiary/10"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 text-tertiary"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m4.5 12.75 6 6 9-13.5"></path>
+          </svg>
+        </div>
+        <div>
+          <p class="font-serif font-bold text-light">You're in!</p>
+          <p class="text-xs text-light/40">See you in your inbox soon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#subscribe-form");
+  const wrapper = document.querySelector("#subscribe-form-wrapper");
+  const successEl = document.querySelector("#subscribe-success");
+  const errorEl = document.querySelector("#subscribe-error");
+  const btn = document.querySelector<HTMLButtonElement>("#subscribe-btn");
+
+  const btnIcon = document.querySelector("#subscribe-btn-icon");
+  const spinner = document.querySelector("#subscribe-spinner");
+
+  const setLoading = (loading: boolean) => {
+    if (!btn || !btnIcon || !spinner) { return; }
+    btn.disabled = loading;
+    btnIcon.classList.toggle("hidden", loading);
+    spinner.classList.toggle("hidden", !loading);
+  };
+
+  const showError = (message: string) => {
+    if (!errorEl) { return; }
+    errorEl.textContent = message;
+    errorEl.classList.remove("hidden");
+  };
+
+  const hideError = () => {
+    if (!errorEl) { return; }
+    errorEl.classList.add("hidden");
+    errorEl.textContent = "";
+  };
+
+  const showSuccess = () => {
+    wrapper?.classList.add("hidden");
+    successEl?.classList.remove("hidden");
+  };
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    hideError();
+
+    const nameInput = form.elements.namedItem("name") as HTMLInputElement;
+    const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+    const tokenInput = form.elements.namedItem("cf-turnstile-response") as
+      | HTMLInputElement
+      | null;
+
+    const name = nameInput?.value.trim();
+    const email = emailInput?.value.trim();
+    const turnstileToken = tokenInput?.value?.trim() ?? "";
+
+    if (!name) {
+      showError("Please enter your name.");
+      nameInput?.focus();
+      return;
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError("Please enter a valid email address.");
+      emailInput?.focus();
+      return;
+    }
+
+    if (!turnstileToken) {
+      showError("Please complete the captcha challenge.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        body: JSON.stringify({ email, name, turnstileToken }),
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        showSuccess();
+      } else {
+        showError(data.error ?? "Something went wrong. Please try again later.");
+        setLoading(false);
+      }
+    } catch {
+      showError("Network error. Please check your connection and try again.");
+      setLoading(false);
+    }
+  });
+
+
+</script>

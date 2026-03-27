@@ -40,7 +40,7 @@
 
         const tiles: { elem: HTMLDivElement; x: number; y: number }[] = [];
 
-        const handleMouseMove = (e) => {
+        const handleMouseMove = (e: MouseEvent) => {
             mousePos.x = e.clientX;
             mousePos.y = e.clientY + window.scrollY;
             cursor.style.left = mousePos.x + "px";
@@ -48,7 +48,7 @@
         };
         document.addEventListener("mousemove", handleMouseMove);
 
-        const createTile = (index) => {
+        const createTile = (index: number) => {
             const tile = document.createElement("div");
             tile.classList.add("tile");
             const dot = document.createElement("div");
@@ -57,7 +57,7 @@
             return tile;
         };
 
-        const createTiles = (quantity) => {
+        const createTiles = (quantity: number) => {
             for (let i = 0; i < quantity; i++) {
                 const tile = createTile(i);
                 gridContainer.append(tile);
