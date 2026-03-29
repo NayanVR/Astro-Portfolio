@@ -17,7 +17,7 @@ This is not a moral failing. It is a design specification.
 
 Psychologists call it psychic numbing, the phenomenon where emotional response to death does not scale with scale. The feeling peaks somewhere around one. Maybe two. A single named child reported on the news with photographs and updates generates more grief than a famine affecting millions (like you forgot famine of china or you never knew). The math of suffering runs in reverse: the larger the number, the smaller the feeling. The mind, confronted with mass death, does not grieve harder. It goes quiet.
 
-Stalin, not a figure one often cites for insight, but occasionally useful as an accidental data point, is reported to have observed that one death is a tragedy, a million deaths is a statistic. He was not, for once, being merely cold. I feel he was being accidentally precise about the architecture of human empathy. We feel the one. The million becomes information.
+Quote originated in 1924 from French satirical paper Comic-Finance "death of one man is terrible, 100k deaths is a statistic". It was not, for once, being merely cold. I feel they were being accidentally precise about the architecture of human empathy. We feel the one. The million becomes information.
 
 Which raises the question that this whole article is, at its core, trying to sit with:
 
