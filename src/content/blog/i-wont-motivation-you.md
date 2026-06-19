@@ -1,7 +1,7 @@
 ---
 title: "I won't motivate you"
 pubDate: 2026-04-18
-description: "I won't motivate you"
+description: "I said i won't"
 author: "Nayan"
 category: "Thoughts"
 tags: [""]
